@@ -43,6 +43,9 @@ class Instructor extends Person{
     grade(){
         return `${this.name} receives a perfect score on ${this.subject}`
     }
+    graded(grade){
+       return `${this.grade}` + (Math.floor(Math.random() * 100))
+     }
 }
 
 
@@ -84,18 +87,24 @@ class Student extends Instructor{
     listsSubjects(){
          return this.favSubjects.toString().split(',').join('\r\n');
     }
-    //     this.favSubjects.forEach(function(i){
-    //     this.favSubjects[i] = this.favSubjects[i] + '<br>';
-    //     return this.favSubjects;
-    //  })
-    // }
-    PRAssingment(){
+ 
+    PRAssingment(subject){
         return `${this.name} has submitted a PR for ${this.subject}`
     
 }
-    sprintChallenge(){
+    sprintChallenge(subject){
       return `${this.name} has begun sprint challenge on ${this.subject}`
     }
+    graduate(){
+        if(this.grade === 70){
+            return`${this.name} can graduate`
+            }else{
+                return`${this.name} has to study more`
+            }
+        }
+
+    // (this.grade>= 70) ? `${this.name} can graduate` : `${this.name} has to study more`
+        
  }
 
 
@@ -108,17 +117,19 @@ const Riley = new Student({
     location:'Mississippi',
     className:'History101',
     previousBackground:'Student',
-    favSubjects:['Computer Science','Math','JavaScript']
+    favSubjects:['Computer Science','Math','JavaScript'],
+    grade:70,
 })
 const Mike = new Student({
     name:'Mike',
     subject:'Art',
     className:'English',
     previousBackground:'Student',
-    favSubjects:['History','Spanish','Public Speaking']
+    favSubjects:['History','Spanish','Public Speaking'],
+    grade:90,
 })
 
-
+console.log(Mike.graduate())
 console.log(Riley.listsSubjects())
 console.log(Riley.PRAssingment())
 console.log(Mike.sprintChallenge())
@@ -133,18 +144,18 @@ class ProjectManage extends Instructor{
      this.favInstructor = attr.favInstructor;
      this.channel = attr.channel;
     }
-    standUp(){
+    standUp(channel){
         return `${this.name} announces to ${this.channel} @channel standy times!`
     }
-    debugsCode(){
-         return `${this.name} debugs ${this.student}'s code on ${this.subject}`
+    debugsCode(student, subject){
+         return `${this.name} debugs ${this.name}'s code on ${this.subject}`
     }
 }
 
 
 const fred = new ProjectManage({
     name: 'Fred',
-    location: 'Bedrock',
+    location: 'Portland',
     age: 37,
     favLanguage: 'JavaScript',
     specialty: 'Front-end',
@@ -152,6 +163,20 @@ const fred = new ProjectManage({
     gradClassName:'CS1',
     favInstructor:'Sean',
     channel:'Lambda',
+    subject:'Math'
+  });
+const Carrie = new ProjectManage({
+    name: 'Carrie',
+    location: 'Portland',
+    age: 34,
+    favLanguage: 'Python',
+    specialty: 'Back-end',
+    catchPhrase: `Don't forget the homies`,
+    gradClassName:'CS5',
+    favInstructor:'Sean',
+    channel:'Lambda',
+    subject:'Math'
   });
 
   console.log(fred.standUp())
+  console.log(Carrie.debugsCode())
